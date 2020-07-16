@@ -1,0 +1,223 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}{{ car.title }}Profile{% endblock %}
+{% block keywords %}{{ car.keywords }}Profile{% endblock %}
+{% block description %}{{ car.description }}Profile{% endblock %}
+
+{% block body %}
+
+
+
+<!-- start banner Area -->
+<section class="banner-area relative about-banner" id="home">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    User
+                </h1>
+                <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="elements.html"> User </a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- Start Align Area -->
+<div class="whole-wrap">
+    <div class="container">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-md-6">
+
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+
+                            <th>Title</th>
+
+                            <th>Description</th>
+                            <th>Image</th>
+                            <th>Price</th>
+
+
+                        </tr>
+                        </thead>
+
+
+                         {% for vehicle in vehicles %}
+                            <tr>
+
+                                <td>{{ vehicle.title }}</td>
+
+                                <td>{{ vehicle.description }}</td>
+                                <td><img src="{{ asset('uploads/images/van.png'~vehicle.image) }}" height="80"></td>
+
+                                <td>{{ vehicle.price }}</td>
+
+                                <td>
+                                    <form action="{{ path('user_reservation_new', {'cid': vehicle.id , 'vid': vehicle.id}) }}" method="post">
+                                       {# Distance<input  id="distance" name="[distance]" type="number" value="1">#}
+                                        From Destination:<input  id="fromdest" name="fromdest" type="text" value="1" style="width:140px"required>
+                                        To Destination:<input  id="todest" name="todest" type="text" value="1"  style="width:140px"required>
+                                        Date:<input  id="date" name="date" type="date" value="1"  style="width:140px"required>
+                                        <input type="submit" value="Reserve Vehicle" class="btn btn-danger">
+
+                                    </form>
+
+                                </td>
+                            </tr> {% else %}
+                            <tr>
+                                <td colspan="9">no vehicles found</td>
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="col-md-6 mt-sm-20 left-align-p">
+
+
+
+    <table class="table">
+        <tbody>
+
+            <tr>
+                <th>Title</th>
+                <td>{{ car.title }}</td>
+            </tr>
+            <tr>
+                <th>Keywords</th>
+                <td>{{ car.keywords }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ car.description }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ car.image }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ car.phone }}</td>
+            </tr>
+            <tr>
+                <th>Fax</th>
+                <td>{{ car.fax }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ car.email }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ car.city }}</td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>{{ car.country }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ car.location }}</td>
+            </tr>
+
+            <tr>
+                <th>Detail</th>
+                <td>{{ car.detail | raw }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="about-author d-flex p-4 bg-light">
+        <h3 class="mb-5"> Comments</h3>
+
+        {% for rs in comments %}
+            <ul class="comment-list">
+
+                <li class="comment">
+                    <div class="vcard bio">
+
+                    </div>
+                    <div class="comment-body">
+                        <h3>{{ rs.subject }} [Rate : {{ rs.rate }}] </h3>
+                        <hr>
+                        <div class="meta"></div>
+                        <p>{{ rs.comment }}</p>
+                        <p><a href="#" class="reply">Reply</a></p>
+                    </div>
+                </li>
+
+            </ul>
+    </div>
+        {% endfor %}
+
+
+
+    {% if app.user%}
+        <h4>Write Your Comment</h4>
+
+
+        <form name="comment" method="post"  class="bg-white p-5 contact-form">
+
+            <div class="form-group">
+                <input type="text" id="comment_subject" name="comment[subject]" class="form-control" placeholder="Subject">
+            </div>
+            <div class="form-group">
+                <select id="comment_rate" name="comment[rate]" class="form-control" placeholder="Subject">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+
+
+                </select>
+            </div>
+            <div class="form-group">
+                <textarea id="comment_comment" name="comment[comment]" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+            </div>
+
+
+
+            <div class="form-group">
+
+                <input type="hidden" name="token" value="{{csrf_token('comment') }}" >
+
+            </div>
+            <input type="submit" class="btn btn-primary py-3 px-5">
+        </form>
+    {% else %}
+        <li>
+            <a href="/loginuser">Want to add comment? Please Login</a>
+        </li>
+    {% endif %}
+</div>
+
+
+
+
+
+
+
+
+    {% endblock %}

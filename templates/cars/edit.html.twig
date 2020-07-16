@@ -1,0 +1,53 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}{{ app.user.name }}Profile{% endblock %}
+
+{% block body %}
+
+    <SCRIPT language="JavaScript" type="text/javascript">
+        function openWin(windowURL,windowName,windowFeatures,){
+            window.open(windowURL,windowName,windowFeatures);
+        }
+    </SCRIPT>
+
+
+
+
+    <!-- start banner Area -->
+<section class="banner-area relative about-banner" id="home">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    User
+                </h1>
+                <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="elements.html"> User</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- Start Align Area -->
+<div class="whole-wrap">
+    <div class="container">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-md-4">
+                    {{ include ('user/usermenu.html.twig') }}
+                </div>
+
+                <div class="col-md-6 mt-sm-20 left-align-p">
+    {{ include('cars/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('user_cars_index') }}">back to list</a>
+
+    {{ include('cars/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

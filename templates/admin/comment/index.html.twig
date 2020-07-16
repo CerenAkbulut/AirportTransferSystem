@@ -1,0 +1,57 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+<!-- wrapper  -->
+<!-- ============================================================== -->
+<div class="dashboard-wrapper">
+    <div class="container-fluid dashboard-content">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Subject</th>
+                <th>Comment</th>
+                <th>Status</th>
+                <th>Ip</th>
+                <th>Userid</th>
+                <th>Created_at</th>
+                <th>Updated_at</th>
+                <th>Rate</th>
+                <th>Carid</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+                <td>{{ comment.id }}</td>
+                <td>{{ comment.subject }}</td>
+                <td>{{ comment.comment }}</td>
+                <td>{{ comment.status }}</td>
+                <td>{{ comment.ip }}</td>
+                <td>{{ comment.userid }}</td>
+                <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ comment.updatedAt ? comment.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ comment.rate }}</td>
+                <td>{{ comment.carid }}</td>
+                <td>
+                    <a href="{{ path('admin_comment_show', {'id': comment.id}) }}">show</a>
+                    <a href="{{ path('admin_comment_edit', {'id': comment.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_comment_new') }}">Create new</a>
+
+{% endblock %}

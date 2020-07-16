@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vehicles{% endblock %}
+
+{% block body %}
+    <h1>Vehicles</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ vehicle.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ vehicle.title }}</td>
+            </tr>
+            <tr>
+                <th>Vehicleid</th>
+                <td>{{ vehicle.vehicleid }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ vehicle.description }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ vehicle.image }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ vehicle.price }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ vehicle.status }}</td>
+            </tr>
+            <tr>
+                <th>Numberofvehicles</th>
+                <td>{{ vehicle.numberofvehicles }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_vehicles_index') }}">back to list</a>
+
+    <a href="{{ path('admin_vehicles_edit', {'id': vehicle.id}) }}">edit</a>
+
+    {{ include('admin/vehicles/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}{{ app.user.name }}Profile{% endblock %}
+
+{% block body %}
+
+
+
+    <!-- start banner Area -->
+    <section class="banner-area relative about-banner" id="home">
+        <div class="overlay overlay-bg"></div>
+        <div class="container">
+            <div class="row d-flex align-items-center justify-content-center">
+                <div class="about-content col-lg-12">
+                    <h1 class="text-white">
+                        Elements
+                    </h1>
+                    <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="elements.html"> Elements</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End banner Area -->
+
+
+
+    <!-- Start Align Area -->
+    <div class="whole-wrap">
+    <div class="container">
+    <div class="section-top-border">
+
+    <div class="row">
+
+
+    {{ include ('user/usermenu.html.twig') }}
+
+
+    <div class="col-md-9 mt-sm-20 left-align-p">
+
+                    {{ include('user/_form.html.twig',{'button_label':'Update'}) }}
+    </div>
+    </div>
+    </div>
+
+
+
+
+
+    </div>
+
+
+    </div>
+    </div>
+    <!-- End Align Area -->
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Vehicles{% endblock %}
+
+{% block body %}
+    <h1>{{cars.title}}</h1>
+    <h1>Create new Vehicles</h1>
+
+    {{ include('admin/vehicles/_form.html.twig') }}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Vehicleid</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Numberofvehicles</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for vehicle in vehicles %}
+            <tr>
+                <td>{{ vehicle.id }}</td>
+                <td>{{ vehicle.title }}</td>
+                <td>{{ vehicle.vehicleid }}</td>
+                <td>{{ vehicle.description }}</td>
+                <td><img src="{{ asset('uploads/images/'~vehicles.image) }}" height="60"></td>
+                <td>{{ vehicle.price }}</td>
+                <td>{{ vehicle.status }}</td>
+                <td>{{ vehicle.numberofvehicles }}</td >
+                <td>
+                    <a href="{{ path('admin_vehicles_edit', {'id': vehicle.id}) }}"class="btn btn-success">Edit</a>
+                </td>
+                <td>
+
+                    <form method="post" action="{{ path('admin_vehicles_delete', {'id': vehicle.id,'cid':cars.id }}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ vehicle.id) }}">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+
+                </td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}{{ app.user.name }}Profile{% endblock %}
+
+{% block body %}
+
+
+
+    <!-- start banner Area -->
+    <section class="banner-area relative about-banner" id="home">
+        <div class="overlay overlay-bg"></div>
+        <div class="container">
+            <div class="row d-flex align-items-center justify-content-center">
+                <div class="about-content col-lg-12">
+                    <h1 class="text-white">
+                        User
+                    </h1>
+                    <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="elements.html"> User</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- Start Align Area -->
+    <div class="whole-wrap">
+        <div class="container">
+            <div class="section-top-border">
+                <div class="row">
+                    <div class="col-md-4">
+                        {{ include ('user/usermenu.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                    <!-- wrapper  -->
+                    <!-- ============================================================== -->
+                    <div class="dashboard-wrapper">
+                        <div class="container-fluid dashboard-content">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Userid</th>
+                                            <th>Cars</th>
+                                            <th>Vehicle</th>
+                                            <th>Name</th>
+                                            <th>Surname</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Fromdest</th>
+                                            <th>Todest</th>
+                                            <th>Total</th>
+                                            <th>Ip</th>
+                                            <th>Date</th>
+                                            <th>Message</th>
+                                            <th>Note</th>
+                                            <th>Status</th>
+                                            <th>Created_at</th>
+                                            <th>actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for reservation in reservations %}
+                                            <tr>
+                                                <td>
+                                                    <a href="{{ path("cars_show",{'id':reservation.carsid})}}">
+                                                    {{ reservation.cname }}
+                                                </td>
+                                                <td>{{ reservation.id }}</td>
+                                                <td>{{ reservation.userid }}</td>
+                                                <td>{{ reservation.cname }}</td>
+                                                <td>{{ reservation.vname }}</td>
+                                                <td>{{ reservation.name }}</td>
+                                                <td>{{ reservation.surname }}</td>
+                                                <td>{{ reservation.email }}</td>
+                                                <td>{{ reservation.phone }}</td>
+                                                <td>{{ reservation.fromdest}}</td>
+                                                <td>{{ reservation.todest}}</td>
+                                                <td>{{ reservation.total }}</td>
+                                                <td>{{ reservation.ip }}</td>
+                                                <td>{{ reservation.date|date('d-m-Y') }}</td>
+                                                <td>{{ reservation.message }}</td>
+                                                <td>{{ reservation.note }}</td>
+                                                <td>{{ reservation.status }}</td>
+                                                <td>{{ reservation.created_at }}</td>
+                                                <td>
+                                                    <a href="{{ path('user_reservation_show', {'id': reservation.id}) }}">show</a>
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="18">no records found</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+    <!-- End Align Area -->
+{% endblock %}

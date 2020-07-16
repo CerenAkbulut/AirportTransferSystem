@@ -1,0 +1,114 @@
+{% extends 'homebase.html.twig' %}
+
+{% block title %}{{ app.user.name }}Profile{% endblock %}
+
+{% block body %}
+
+
+
+    <!-- start banner Area -->
+    <section class="banner-area relative about-banner" id="home">
+        <div class="overlay overlay-bg"></div>
+        <div class="container">
+            <div class="row d-flex align-items-center justify-content-center">
+                <div class="about-content col-lg-12">
+                    <h1 class="text-white">
+                        User
+                    </h1>
+                    <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="elements.html"> User</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- Start Align Area -->
+    <div class="whole-wrap">
+    <div class="container">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-md-4">
+                    {{ include ('user/usermenu.html.twig') }}
+                </div>
+                <br>
+
+
+                <div class="col-md-6 mt-sm-20 left-align-p">
+                    <a href="{{ path('user_cars_new') }}" class="genric-btn info radius">Create new</a>
+
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Title</th>
+                            <th>Keywords</th>
+                            <th>Description</th>
+                            <th>Image</th>
+                            <th>Email</th>
+                            <th>City</th>
+                            <th>Country</th>
+                            <th>I.Gallery</th>
+                            <th>Vehicles</th>
+
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for car in cars %}
+                            <tr>
+                                <td>{{ car.id }}</td>
+                                <td>{{ car.title }}</td>
+                                <td>{{ car.keywords }}</td>
+                                <td>{{ car.description }}</td>
+                                <td><img src="{{ asset('uploads/images/'~ car.image )}} " height="40"> </td>
+                                <td>{{ car.email }}</td>
+                                <td>{{ car.city }}</td>
+                                <td>{{ car.country }}</td>
+
+                                <td>
+                                    <a href="javascript:openWin('{{ path('admin_image_new',{'id': car.id}) }}','','toolbar=no,location=no,directories=0,status=no,top=50,left=100,menuBar=no,scrollBars=yes,resizable=no,width=900,height=600');">
+                                        <img src="{{ asset('assets/admin/img') }}/gallery1.jpg" style="height: 30px" title="image gallery">
+                                    </a>
+                                </td>
+
+                                <td>
+                                    <a href="javascript:openWin('{{ path('admin_vehicles_new',{'id': car.id}) }}','','toolbar=no,location=no,directories=0,status=no,top=50,left=100,menuBar=no,scrollBars=yes,resizable=no,width=900,height=600');">
+                                        <img src="{{ asset('assets/admin/img') }}/economy.png" style="height: 30px" title="vehicles">
+                                    </a>
+                                </td>
+
+                                <td>
+                                    <a href="{{ path('admin_user_show',{'id':car.userid })}}"></a>
+                                </td>
+
+
+
+
+
+
+
+                                <td>
+                                    <a href="{{ path('admin_cars_show', {'id': car.id}) }}">Show</a>
+                                    <a href="{{ path('admin_cars_edit', {'id': car.id}) }}">Edit</a>
+                                </td>
+                                <td>
+                                    {{include('cars/_delete_form.html.twig')  }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="15">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

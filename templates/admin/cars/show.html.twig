@@ -1,0 +1,74 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}Cars{% endblock %}
+
+{% block body %}
+    <h1>Cars</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ car.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ car.title }}</td>
+            </tr>
+            <tr>
+                <th>Keywords</th>
+                <td>{{ car.keywords }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ car.description }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{ asset('uploads/images/'~car.image) }}" height="100" ></td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ car.phone }}</td>
+            </tr>
+            <tr>
+                <th>Fax</th>
+                <td>{{ car.fax }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ car.email }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ car.city }}</td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>{{ car.country }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ car.location }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ car.status }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ car.createdAt ? car.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{{ car.updatedAt ? car.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_cars_index',{'id':car.id}) }}" class="btn btn-primary">Back to List</a>
+
+    <a href="{{ path('admin_cars_edit', {'id': car.id})}}" class="btn btn-primary">Edit</a>
+
+    {{ include('admin/cars/_delete_form.html.twig') }}
+{% endblock %}

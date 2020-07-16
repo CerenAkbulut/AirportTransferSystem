@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Reservation{% endblock %}
+
+{% block body %}
+    <h1>Edit Reservation</h1>
+
+    {{ include('admin/reservation/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+
+    {{ include('admin/reservation/_delete_form.html.twig') }}
+{% endblock %}

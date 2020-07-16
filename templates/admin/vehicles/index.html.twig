@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vehicles index{% endblock %}
+
+{% block body %}
+    <h1>Vehicles index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Vehicleid</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Numberofvehicles</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for vehicle in vehicles %}
+            <tr>
+                <td>{{ vehicle.id }}</td>
+                <td>{{ vehicle.title }}</td>
+                <td>{{ vehicle.vehicleid }}</td>
+                <td>{{ vehicle.description }}</td>
+                <td>{{ vehicle.image }}</td>
+                <td>{{ vehicle.price }}</td>
+                <td>{{ vehicle.status }}</td>
+                <td>{{ vehicle.numberofvehicles }}</td >
+                <td>
+                    <a href="{{ path('admin_vehicles_show', {'id': vehicle.id}) }}">show</a>
+                    <a href="{{ path('admin_vehicles_edit', {'id': vehicle.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_vehicles_new') }}">Create new</a>
+{% endblock %}

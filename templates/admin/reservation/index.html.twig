@@ -1,0 +1,60 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+<!-- wrapper  -->
+<!-- ============================================================== -->
+<div class="dashboard-wrapper">
+    <div class="container-fluid dashboard-content">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name Surname</th>
+                <th>Car Name</th>
+                <th>Vehicle Name</th>
+                 <th>Fromdest</th>
+                <th>Todest</th>
+                <th>Total</th>
+                <th>Note</th>
+                <th>Status</th>
+                <th>Created_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+
+                <td><a href="{{ path('admin_user_show', {'id': reservation.userid}) }}">{{ reservation.name }} {{ reservation.surname }}</a></td>
+                <td>{{ reservation.cname }}</td>
+                <td>{{ reservation.vname }}</td>
+                <td>{{ reservation.fromdest  }}</td>
+                <td>{{ reservation.todest }}</td>
+                <td>{{ reservation.total }}</td>
+                <td>{{ reservation.note }}</td>
+                <td>{{ reservation.status }}</td>
+                <td>{{ reservation.created_at? reservation.created_at|date('d-m-Y') : '' }}</td>
+
+                <td>
+                    <a  class="btn btn-space btn-primary" href="{{ path('admin_reservation_show', {'id': reservation.id}) }}">Show</a>
+                    <a class="btn btn-primary"  href="{{ path('admin_reservation_edit', {'id': reservation.id}) }}">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="18">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
